@@ -66,6 +66,78 @@ Humanoid.prototype.greet = function () {
   return `${this.name} offers a greeting in ${this.language}`;
 }
 
+// STRETCH TASK
+
+// Villain Constructor Function
+function Villain(attributes) {
+  Humanoid.call(this, attributes);
+  this.lightningBolt = attributes.lightningBolt;
+  this.opponentHealth = attributes.opponentHealth;
+}
+
+// Inheritance
+Villain.prototype = Object.create(Humanoid.prototype);
+// Prototype Method is Created Here
+Villain.prototype.attack = function () {
+  this.opponentHealth -= 10;
+  return `A flash of light! The great ${this.name} will finish you and use your bones for stew!`;
+}
+
+// Hero Constructor Function
+function Hero(attributes) {
+  Humanoid.call(this, attributes);
+  this.holyLight = attributes.holyLight;
+  this.opponentHealth = attributes.opponentHealth;
+}
+
+// Inheritance
+Hero.prototype = Object.create(Humanoid.prototype);
+// Prototype Method is Created Here
+Hero.prototype.returnFire = function () {
+  this.opponentHealth -= 15;
+  return `${this.name} fires back, unshaken.`;
+}
+
+// New Villain Created
+const Maestro = new Villain ({
+  createdAt: new Date(),
+  dimensions: {
+    length: 1,
+    width: 2,
+    height: 5,
+  },
+  healthPoints: 15,
+  name: 'Maestro',
+  team: 'Forest Kingdom',
+  weapons: [
+    'Staff',
+    'Dagger',
+    'Spellbook',
+  ],
+  language: 'Demonic',
+  lightningBolt: 'Lightning Strike!',
+  opponentHealth: 20,
+});
+
+// New Hero Created
+const HeroMan = new Hero ({
+  createdAt: new Date(),
+  dimensions: {
+    length: 1,
+    width: 2,
+    height: 4,
+  },
+  healthPoints: 20,
+  name: 'HeroMan',
+  team: 'Forest Kingdom',
+  weapons: [
+    'Bow',
+    'Sword&Shield',
+  ],
+  language: 'Human',
+  holyLight: "Holy Light, strike with thine might!",
+  opponentHealth: 15,
+});
 /*
   * Inheritance chain: GameObject -> CharacterStats -> Humanoid
   * Instances of Humanoid should have all of the same properties as CharacterStats and GameObject.
@@ -141,3 +213,13 @@ Humanoid.prototype.greet = function () {
   // * Create Villain and Hero constructor functions that inherit from the Humanoid constructor function.
   // * Give the Hero and Villains different methods that could be used to remove health points from objects which could result in destruction if health gets to 0 or drops below 0;
   // * Create two new objects, one a villain and one a hero and fight it out with methods!
+
+console.log(`${HeroMan.name} walked into ${Maestro.name}s trap!`);
+console.log(`${Maestro.name} has the following weapons ${Maestro.weapons} while ${HeroMan.name} has ${HeroMan.weapons}`);
+console.log(`${Maestro.name} can use ${Maestro.lightningBolt}`);
+console.log(`${HeroMan.name} can use ${HeroMan.holyLight}`);
+console.log(`${HeroMan.name} has ${Maestro.opponentHealth} and ${Maestro.name} has ${HeroMan.opponentHealth}`);
+console.log(`${Maestro.attack()}`);
+console.log(`${HeroMan.name} recoils, and now has ${Maestro.opponentHealth} Health`);
+console.log(`${HeroMan.returnFire()}`);
+console.log(`${Maestro.name} falters, crumbling to the ground, leaving ${HeroMan.opponentHealth} Health left`);
